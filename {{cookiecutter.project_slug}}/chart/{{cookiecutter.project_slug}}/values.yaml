@@ -46,12 +46,12 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: {{ cookiecutter.project_slug }}.example.com
+    - host: {{ cookiecutter.project_slug }}.{{ cookiecutter.domain_name }}
       paths: []
   tls: []
   #  - secretName: {{ cookiecutter.project_slug }}-tls
   #    hosts:
-  #      - {{ cookiecutter.project_slug }}.example.com
+  #      - {{ cookiecutter.project_slug }}.{{ cookiecutter.domain_name }}
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

@@ -1,15 +1,15 @@
-{{- if .Values.autoscaling.enabled }}
+{% raw %}{{- if .Values.autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "{{ cookiecutter.project_slug }}.fullname" . }}
+  name: {{ include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.fullname" . }}
   labels:
-    {{- include "{{ cookiecutter.project_slug }}.labels" . | nindent 4 }}
+    {{- include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "{{ cookiecutter.project_slug }}.fullname" . }}
+    name: {{ include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
@@ -26,3 +26,4 @@ spec:
         targetAverageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
     {{- end }}
 {{- end }}
+{% endraw %}

@@ -1,16 +1,16 @@
-apiVersion: apps/v1
+{% raw %}apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "{{ cookiecutter.project_slug }}.fullname" . }}
+  name: {{ include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.fullname" . }}
   labels:
-    {{- include "{{ cookiecutter.project_slug }}.labels" . | nindent 4 }}
+    {{- include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "{{ cookiecutter.project_slug }}.selectorLabels" . | nindent 6 }}
+      {{- include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "{{ cookiecutter.project_slug }}.selectorLabels" . | nindent 8 }}
+        {{- include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "{{ cookiecutter.project_slug }}.serviceAccountName" . }}
+      serviceAccountName: {{ include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -59,3 +59,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{% endraw %}
