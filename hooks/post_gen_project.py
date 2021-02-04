@@ -60,6 +60,8 @@ def remove_docker_files():
     for file_name in file_names:
         os.remove(file_name)
 
+def remove_chart_files():
+    shutil.rmtree("chart")
 
 def remove_utility_files():
     shutil.rmtree("utility")
@@ -346,6 +348,11 @@ def main():
         remove_utility_files()
     else:
         remove_docker_files()
+
+    if "{{ cookiecutter.use_helm }}".lower() == "y":
+        remove_utility_files()
+    else:
+        remove_chart_files()
 
     if (
         "{{ cookiecutter.use_docker }}".lower() == "y"

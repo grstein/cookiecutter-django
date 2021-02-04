@@ -17,6 +17,7 @@
   "windows": "n",
   "use_pycharm": "n",
   "use_docker": "n",
+  "use_helm": "n",
   "postgresql_version": [
     "12.3",
     "11.8",
